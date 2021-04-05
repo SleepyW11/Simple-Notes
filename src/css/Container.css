@@ -1,0 +1,7 @@
+.container {
+  min-height: 90vh;
+  width: 98%;
+  background-color: white;
+  border-radius: 5px;
+  border: solid #cccccc 1px;
+}

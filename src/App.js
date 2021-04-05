@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import AddButton from "./components/AddButton";
+import AddNote from "./components/AddNote";
+import Container from "./components/Container";
+import "./css/App.css";
+import { useSelector } from "react-redux";
+import { saveState } from "./redux/reducers/localStorage";
 
 function App() {
+  const state = useSelector((state) => state);
+  saveState(state);
+
+  const [isAdd, setAdd] = useState(false);
+  const toggleAdd = () => {
+    setAdd(!isAdd);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container isAdd={isAdd} />
+      <AddButton isAdd={isAdd} toggleAdd={toggleAdd} />
+      {isAdd ? <AddNote toggleAdd={toggleAdd} /> : ""}
     </div>
   );
 }
